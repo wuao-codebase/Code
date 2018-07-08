@@ -2,6 +2,7 @@ package algorithm;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
 
 public class BinaryTree {
     private TNode mNode;
@@ -57,6 +58,24 @@ public class BinaryTree {
             inOrder(mNode.right);
         }
     }
+
+    public void inOrder1(TNode mNode) {
+        Stack<TNode> stack = new Stack<>();
+        while(mNode != null || !stack.empty())
+        {
+            while (mNode != null)
+            {
+                stack.push(mNode);
+                mNode = mNode.left;
+            }
+            mNode = stack.pop();
+            System.out.print(mNode.value + "   ");
+            mNode = mNode.right;
+
+        }
+    }
+
+
     //后序遍历
     public void postOrder(TNode mNode) {
         if (mNode!= null) {
@@ -194,12 +213,7 @@ public class BinaryTree {
         }
         binaryTree.inOrder(binaryTree.mNode);
         System.out.println();
-        binaryTree.LevelOrder(binaryTree.mNode);
-        System.out.println(binaryTree.SizeTree(binaryTree.mNode));
-        System.out.println(binaryTree.HeightTree(binaryTree.mNode));
-        System.out.println(binaryTree.DeepTree(binaryTree.mNode).value);
-        System.out.println(binaryTree.DiameterTree(binaryTree.mNode,diameter));
-
+        binaryTree.inOrder1(binaryTree.mNode);
     }
 
 }
